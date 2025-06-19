@@ -1,0 +1,193 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "MRN.#####",
+ "creation": "2025-06-18 12:44:12.964673",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "full_name",
+  "renewal_date",
+  "amended_from",
+  "current_plan_section",
+  "plan",
+  "membership_fee",
+  "previous_end_date",
+  "continue_with_other_plan_section",
+  "new_plan",
+  "new_membership_fee",
+  "duration",
+  "validity",
+  "payment_section",
+  "mode_of_payment",
+  "confirm_the_renewal_of_membership_section",
+  "submit",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fetch_from": "plan.full_name",
+   "fieldname": "full_name",
+   "fieldtype": "Link",
+   "label": "Name",
+   "options": "Member"
+  },
+  {
+   "fieldname": "renewal_date",
+   "fieldtype": "Date",
+   "label": "Renewal Date"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Membership Renewal",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "current_plan_section",
+   "fieldtype": "Section Break",
+   "label": "Current Plan"
+  },
+  {
+   "fetch_from": "full_name.membership_plan",
+   "fieldname": "plan",
+   "fieldtype": "Link",
+   "label": "Plan",
+   "options": "Member"
+  },
+  {
+   "fetch_from": "full_name.membership_fee",
+   "fieldname": "membership_fee",
+   "fieldtype": "Link",
+   "label": "Membership Fee",
+   "options": "Member"
+  },
+  {
+   "fetch_from": "plan.end_date",
+   "fieldname": "previous_end_date",
+   "fieldtype": "Link",
+   "label": "Validity",
+   "options": "Member"
+  },
+  {
+   "fieldname": "continue_with_other_plan_section",
+   "fieldtype": "Section Break",
+   "label": "Continue With Other Plan"
+  },
+  {
+   "fetch_from": "membership_fee.plan",
+   "fieldname": "new_plan",
+   "fieldtype": "Link",
+   "label": "New Plan ",
+   "options": "Membership Plan"
+  },
+  {
+   "fetch_from": "membership_fee.total_fee",
+   "fieldname": "new_membership_fee",
+   "fieldtype": "Link",
+   "label": "New Membership Fee ",
+   "options": "Membership Plan"
+  },
+  {
+   "fetch_from": "membership_fee.duration",
+   "fieldname": "duration",
+   "fieldtype": "Link",
+   "label": "Duration ",
+   "options": "Membership Plan",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "plan.end_date",
+   "fieldname": "validity",
+   "fieldtype": "Date",
+   "label": "Validity"
+  },
+  {
+   "fieldname": "payment_section",
+   "fieldtype": "Section Break",
+   "label": "Payment"
+  },
+  {
+   "fieldname": "mode_of_payment",
+   "fieldtype": "Select",
+   "label": "Mode of Payment",
+   "options": "Cash\nUPI\nOnline Transfer"
+  },
+  {
+   "fieldname": "confirm_the_renewal_of_membership_section",
+   "fieldtype": "Section Break",
+   "label": "Confirm the Renewal of Membership"
+  },
+  {
+   "fieldname": "submit",
+   "fieldtype": "Button",
+   "label": "Submit"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Membership Renewal 1",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2025-06-18 12:44:12.964673",
+ "modified_by": "Administrator",
+ "module": "Fm",
+ "name": "Membership Renewal 1",
+ "naming_rule": "Set by user",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Member",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Trainer",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

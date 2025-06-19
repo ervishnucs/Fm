@@ -148,23 +148,21 @@ app_license = "mit"
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
-# 	"all": [
-# 		"fm.tasks.all"
-# 	],
-# 	"daily": [
-# 		"fm.tasks.daily"
-# 	],
-# 	"hourly": [
-# 		"fm.tasks.hourly"
-# 	],
-# 	"weekly": [
-# 		"fm.tasks.weekly"
-# 	],
-# 	"monthly": [
-# 		"fm.tasks.monthly"
-# 	],
-# }
+scheduler_events = {
+ 	"daily": [
+        "fm.fm.automation.renewal_reminder.send_renewal_reminder",
+         "fm.fm.automation.expire.send_renewal_reminders",
+         "fm.fm.automation.update.expire_members_and_notify"
+    ]
+    
+}
+# In fitness_membership/hooks.py
+doctype_js = {
+    "Member Renwal": [
+             "fm.fm.doctype.member_renwal.member_renewal.js"
+    ]   
+}
+
 
 # Testing
 # -------

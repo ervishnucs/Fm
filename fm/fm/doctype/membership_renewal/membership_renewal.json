@@ -1,0 +1,84 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-06-19 11:11:08.003078",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "name1",
+  "renewal_date",
+  "current_plan_section",
+  "plan",
+  "membership_fee",
+  "validity",
+  "status"
+ ],
+ "fields": [
+  {
+   "fieldname": "name1",
+   "fieldtype": "Link",
+   "label": "Name",
+   "options": "Member"
+  },
+  {
+   "fieldname": "renewal_date",
+   "fieldtype": "Date",
+   "label": "Renewal Date"
+  },
+  {
+   "fieldname": "current_plan_section",
+   "fieldtype": "Section Break",
+   "label": "Current Plan"
+  },
+  {
+   "fetch_from": "name1.fee",
+   "fieldname": "membership_fee",
+   "fieldtype": "Currency",
+   "label": "Membership Fee"
+  },
+  {
+   "fetch_from": "name1.end_date",
+   "fieldname": "validity",
+   "fieldtype": "Date",
+   "label": "Validity"
+  },
+  {
+   "fetch_from": "name1.status",
+   "fieldname": "status",
+   "fieldtype": "Data",
+   "label": "Status"
+  },
+  {
+   "fetch_from": "name1.membership_plan",
+   "fieldname": "plan",
+   "fieldtype": "Data",
+   "label": "plan"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-06-19 11:31:50.631046",
+ "modified_by": "Administrator",
+ "module": "Fm",
+ "name": "Membership Renewal",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
