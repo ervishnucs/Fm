@@ -153,6 +153,9 @@ scheduler_events = {
         "fm.fm.automation.renewal_reminder.send_renewal_reminder",
          "fm.fm.automation.expire.send_renewal_reminders",
          "fm.fm.automation.update.expire_members_and_notify"
+    ],
+     "weekly": [
+        "fm.fm.automation.weekly_report.send_weekly_expiry_summary"
     ]
     
 }

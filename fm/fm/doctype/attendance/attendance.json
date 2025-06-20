@@ -1,6 +1,6 @@
 {
  "actions": [],
- "allow_rename": 1,
+ "autoname": "format:{date}-{member}",
  "creation": "2025-06-17 13:40:22.320475",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -56,10 +56,11 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-06-17 15:45:52.345338",
+ "modified": "2025-06-20 15:43:06.075901",
  "modified_by": "Administrator",
  "module": "Fm",
  "name": "Attendance",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
