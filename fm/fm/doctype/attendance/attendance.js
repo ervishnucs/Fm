@@ -1,8 +1,14 @@
-// Copyright (c) 2025, V and contributors
-// For license information, please see license.txt
 
-// frappe.ui.form.on("Attendance", {
-// 	refresh(frm) {
 
-// 	},
-// });
+frappe.ui.form.on("Attendance", {
+    onload: function(frm) {
+        
+        frm.set_query("member", function() {
+            return {
+                filters: {
+                    status: "Active"
+                }
+            };
+        });
+    }
+});

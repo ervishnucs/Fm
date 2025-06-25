@@ -11,14 +11,14 @@ def expire_members_and_notify():
     )
 
     for member in members_to_expire:
-        # Load full doc (optional, if you need to use it later)
+       
         member_doc = frappe.get_doc("Member", member.name)
 
-        # ✅ Update DB and memory
+       
         frappe.db.set_value("Member", member.name, "status", "Expired")
         member_doc.status = "Expired"
 
-        # ✅ Send email
+        
         if member.email:
             subject = "Your Membership Has Expired"
             message = f"""

@@ -5,7 +5,6 @@ def send_weekly_expiry_summary():
     today = nowdate()
     last_week = add_days(today, -7)
 
-    # Fetch expired memberships
     expired = frappe.db.get_all('Member',
         filters={
             'end_date': ['between', [last_week, today]],
@@ -18,7 +17,7 @@ def send_weekly_expiry_summary():
     if not expired:
         summary = "<p>No memberships expired in the last 7 days.</p>"
     else:
-        # Build HTML table with S.No.
+      
         summary = """
             <h3>Weekly Expired Memberships Summary</h3>
             <table style="border-collapse: collapse; width: 100%;" border="1" cellpadding="6">
@@ -54,9 +53,9 @@ def send_weekly_expiry_summary():
             </table>
         """
 
-    # Send the email
+  
     frappe.sendmail(
-        recipients=["ervishnucs369@gmail.com"],  # Update to your recipient
+        recipients=["ervishnucs369@gmail.com"],  
         subject="Weekly Expired Memberships Summary",
         message=summary
     )

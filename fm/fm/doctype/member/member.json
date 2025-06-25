@@ -12,7 +12,8 @@
   "fee",
   "start_date",
   "end_date",
-  "status"
+  "status",
+  "amended_from"
  ],
  "fields": [
   {
@@ -26,13 +27,15 @@
   {
    "fieldname": "email",
    "fieldtype": "Data",
-   "label": "Email"
+   "label": "Email",
+   "reqd": 1
   },
   {
    "fieldname": "membership_plan",
    "fieldtype": "Link",
    "label": "Membership Plan",
-   "options": "Membership Plan"
+   "options": "Membership Plan",
+   "reqd": 1
   },
   {
    "fieldname": "start_date",
@@ -42,9 +45,11 @@
   {
    "fieldname": "end_date",
    "fieldtype": "Date",
-   "label": "End Date"
+   "label": "End Date",
+   "reqd": 1
   },
   {
+   "default": "Active",
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
@@ -55,12 +60,22 @@
    "fieldtype": "Currency",
    "label": " Fee",
    "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Member",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-06-18 22:22:07.149211",
+ "modified": "2025-06-24 16:00:53.345705",
  "modified_by": "Administrator",
  "module": "Fm",
  "name": "Member",
