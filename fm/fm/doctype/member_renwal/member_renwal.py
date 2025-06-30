@@ -3,23 +3,23 @@ import traceback
 from frappe.model.document import Document
 
 class MEMBERRENWAL(Document):
-    def on_submit(self):
+    def after_insert(self):
         if not (self.name1 and self.new_plan and self.new_validity):
             frappe.msgprint("Member, New Plan, or New Validity is missing. Skipping renewal process.")
             return
 
         try:
-            # Update Member info
+            frappe.flags.in_renewal = True
+            member = frappe.get_doc("Member", self.name1) 
+            member.set("ignore_submit_validation", True) 
             member.membership_plan = self.new_plan
             member.end_date = self.new_validity
             member.status = "Active"
-            member.save(ignore_permissions=True)
 
-
-           
-            # Proceed only if email exists
+            member.save(ignore_permissions=True)  
+          
+            
             if member.email:
-                # HTML Email Content
                 html_message = f"""
                     <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #f8f8f8;">
                         <div style="max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
@@ -61,9 +61,7 @@ class MEMBERRENWAL(Document):
                                 self.doctype,
                                 self.name,
                                 print_format="Membership Renewal",
-                                file_name=f"Membership_Renewal_{self.name}",
-                               
-
+                                file_name=f"Membership_Renewal_{self.name}"
                             )
                         ]
                     )

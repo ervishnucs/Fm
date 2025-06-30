@@ -34,5 +34,5 @@ def expire_members_and_notify():
                 message=message
             )
 
-# Run the function
-expire_members_and_notify()
+
+

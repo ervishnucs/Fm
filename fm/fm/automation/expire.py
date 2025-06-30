@@ -2,7 +2,7 @@ import frappe
 from frappe.utils import nowdate, add_days, format_date
 
 def send_renewal_reminders():
-    reminder_days = 7  # Send reminder 3 days before expiration
+    reminder_days = 7  
     reminder_date = add_days(nowdate(), reminder_days)
 
     expiring_members = frappe.get_all(
@@ -28,5 +28,4 @@ def send_renewal_reminders():
                 message=message
             )
 
-# Call the function
-send_renewal_reminders()
+

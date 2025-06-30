@@ -1,0 +1,78 @@
+{
+ "add_total_row": 1,
+ "add_translate_data": 0,
+ "columns": [
+  {
+   "fieldname": "member",
+   "fieldtype": "Link",
+   "label": "Member",
+   "width": 0
+  },
+  {
+   "fieldname": "checkin",
+   "fieldtype": "Date",
+   "label": "Check In",
+   "width": 0
+  },
+  {
+   "fieldname": "checkout",
+   "fieldtype": "Date",
+   "label": "Check Out",
+   "width": 0
+  }
+ ],
+ "creation": "2025-06-26 13:12:14.962596",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [
+  {
+   "fieldname": "from",
+   "fieldtype": "Date",
+   "label": "From ",
+   "mandatory": 0,
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "to",
+   "fieldtype": "Date",
+   "label": "To",
+   "mandatory": 0,
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "mandatory": 0,
+   "options": "Present\nAbsent",
+   "wildcard_filter": 0
+  }
+ ],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letter_head": "Renewal Reciept",
+ "letterhead": null,
+ "modified": "2025-06-27 10:22:10.379618",
+ "modified_by": "Administrator",
+ "module": "Fm",
+ "name": "Attendence Report",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "SELECT\n    member,\n    checkin,\n    checkout,\n    status\nFROM\n    `tabAttendance`\nWHERE\n    1 = 1\n    {% if filters.from and filters.to %}\n        AND date BETWEEN '{{ filters.from }}' AND '{{ filters.to }}'\n    {% endif %}\n    {% if filters.status %}\n        AND status = '{{ filters.status }}'\n    {% endif %}\nORDER BY\n    date DESC;\n\n",
+ "ref_doctype": "Attendance",
+ "report_name": "Attendence Report",
+ "report_type": "Query Report",
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Member"
+  },
+  {
+   "role": "Trainer"
+  }
+ ],
+ "timeout": 0
+}

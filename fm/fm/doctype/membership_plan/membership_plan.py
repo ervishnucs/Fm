@@ -27,7 +27,7 @@ class MembershipPlan(Document):
 
         # Email subject and body
         if is_new:
-            subject = f"📢 New Membership Plan Launched: {plan_name}"
+            subject = f"New Membership Plan Launched: {plan_name}"
             message = f"""
             <p>Dear Member,</p>
             <p>We’re excited to announce a <strong>new membership plan</strong>:</p>
@@ -40,7 +40,7 @@ class MembershipPlan(Document):
             <p>Thank you,<br>The Membership Team</p>
             """
         else:
-            subject = f"🔔 Membership Plan Updated: {plan_name}"
+            subject = f"Membership Plan Updated: {plan_name}"
             message = f"""
             <p>Dear Member,</p>
             <p>The following membership plan has been <strong>updated</strong>:</p>
@@ -53,7 +53,7 @@ class MembershipPlan(Document):
             <p>Thank you,<br>The Membership Team</p>
             """
 
-        # Send the email to all active members
+       
         for member in members:
             if member.email:
                 frappe.sendmail(
