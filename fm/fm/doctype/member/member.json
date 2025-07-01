@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_guest_to_view": 1,
  "allow_rename": 1,
  "autoname": "field:full_name",
  "creation": "2025-06-16 17:29:58.115053",
@@ -13,7 +14,9 @@
   "start_date",
   "end_date",
   "status",
-  "amended_from"
+  "mode_of_payment",
+  "amended_from",
+  "paid"
  ],
  "fields": [
   {
@@ -31,6 +34,7 @@
    "reqd": 1
   },
   {
+   "default": "Trial",
    "fieldname": "membership_plan",
    "fieldtype": "Link",
    "label": "Membership Plan",
@@ -49,7 +53,7 @@
    "reqd": 1
   },
   {
-   "default": "Active",
+   "default": "Pending",
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
@@ -70,12 +74,25 @@
    "print_hide": 1,
    "read_only": 1,
    "search_index": 1
+  },
+  {
+   "default": "None",
+   "fieldname": "mode_of_payment",
+   "fieldtype": "Select",
+   "label": "Mode Of Payment",
+   "options": "UPI\nCash\nOnline Transfer\nNone"
+  },
+  {
+   "default": "0",
+   "fieldname": "paid",
+   "fieldtype": "Check",
+   "label": "Paid",
+   "options": "Paid"
   }
  ],
  "grid_page_length": 50,
- "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-06-24 16:00:53.345705",
+ "modified": "2025-07-01 17:33:02.101886",
  "modified_by": "Administrator",
  "module": "Fm",
  "name": "Member",

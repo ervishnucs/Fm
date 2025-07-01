@@ -151,13 +151,37 @@ app_license = "mit"
 scheduler_events = {
  	"daily": [
          "fm.fm.automation.expire.send_renewal_reminders",
-         "fm.fm.automation.update.expire_members_and_notify"
+         "fm.fm.automation.update.expire_members_and_notify",
+         
     ],
      "weekly": [
         "fm.fm.automation.weekly_report.send_weekly_expiry_summary"
-    ]
+    ],
+     "cron": {
+        "0 23 * * *": [
+            "fm.fm.automation.attendance.mark_absent_for_missing_attendance"
+        ]
+    }
     
 }
+#Document Event
+# doc_events = {
+#"Membership Plan": {
+        #"after_insert": "fm.fm.doctype.membership_plan.membership_plan.MembershipPlan",
+       # "on_update": "fm.fm.doctype.membership_plan.membership_plan.MembershipPlan"
+    #},
+    
+  #"Member": {
+    #  "after_insert":"fm.fm.doctype.member.member."
+   # }
+    #"Member Renewal": {
+      # "after_insert": "fm.fm.doctype.member_renewal.member_renewal.MemberRenewal"
+   # }
+#}
+
+
+
+
 # In fitness_membership/hooks.py
 
 

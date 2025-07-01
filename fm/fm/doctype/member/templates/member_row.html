@@ -1,0 +1,16 @@
+<h1>{{ doc.full_name }}</h1>
+<p><strong>Email:</strong> {{ doc.email }}</p>
+<p><strong>Plan:</strong> {{ doc.membership_plan }}</p>
+<p><strong>Start Date:</strong> {{ doc.start_date }}</p>
+<p><strong>End Date:</strong> {{ doc.end_date }}</p>
+<p><strong>Status:</strong>
+  {% if doc.status == "Expired" %}
+    <span style="color: red;">{{ doc.status }}</span>
+  {% elif doc.status == "Active" %}
+    <span style="color: green;">{{ doc.status }}</span>
+  {% else %}
+    <span style="color: orange;">{{ doc.status }}</span>
+  {% endif %}
+</p>
+<p><strong>Fee:</strong> ₹{{ doc.fee }}</p>
+

@@ -1,0 +1,12 @@
+{% extends "templates/Member.html"%}
+{%block page_content %}
+<div style="padding: 15px; border-bottom: 1px solid #e0e0e0;">
+  <h3>
+    <a href="{{ doc.route }}">{{ doc.full_name }}</a>
+  </h3>
+  <p>Email: {{ doc.email }}</p>
+  <p>Plan: {{ doc.membership_plan }}</p>
+  <p>Status: {{ doc.status }}</p>
+</div>
+{% endblock %}
+

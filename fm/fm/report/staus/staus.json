@@ -1,0 +1,59 @@
+{
+ "add_total_row": 0,
+ "add_translate_data": 0,
+ "columns": [
+  {
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "label": "Full Name",
+   "width": 0
+  },
+  {
+   "fieldname": "membership_plan",
+   "fieldtype": "Data",
+   "label": "Membership Plan",
+   "width": 0
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "End Date",
+   "width": 0
+  }
+ ],
+ "creation": "2025-07-01 11:05:47.131884",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "mandatory": 1,
+   "options": "Active\nExpired\nPending",
+   "wildcard_filter": 0
+  }
+ ],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letter_head": "Renewal Reciept",
+ "letterhead": null,
+ "modified": "2025-07-01 11:47:58.164824",
+ "modified_by": "Administrator",
+ "module": "Fm",
+ "name": "Staus",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "SELECT full_name,\n  membership_plan,  \n  end_date \nFROM `tabMember`\nWHERE status = %(status)s;\n\n",
+ "ref_doctype": "Member",
+ "report_name": "Staus",
+ "report_script": "",
+ "report_type": "Query Report",
+ "roles": [
+  {
+   "role": "System Manager"
+  }
+ ],
+ "timeout": 0
+}

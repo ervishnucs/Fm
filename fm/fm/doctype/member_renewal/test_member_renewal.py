@@ -5,5 +5,5 @@
 from frappe.tests.utils import FrappeTestCase
 
 
-class TestMEMBERRENWAL(FrappeTestCase):
+class TestMemberRenewal(FrappeTestCase):
 	pass

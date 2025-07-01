@@ -18,7 +18,7 @@ def send_renewal_reminders():
                 <p>Dear <strong>{member.full_name}</strong>,</p>
                 <p>This is a gentle reminder that your membership plan <strong>{member.membership_plan}</strong> is expiring on <strong>{format_date(member.end_date)}</strong>.</p>
                 <p>Please renew your plan to continue enjoying our services.</p>
-                <p><a href="http://fit.local:8000/app/member-renwal/new-member" style="padding: 10px 15px; background: #007bff; color: white; text-decoration: none; border-radius: 5px;">Renew Now</a></p>
+                <p><a href="http://fit.local:8000/app/member-renewal/new?name1={member.name}" style="padding: 10px 15px; background: #007bff; color: white; text-decoration: none; border-radius: 5px;">Renew Now</a></p>
                 <p>Thank you!</p>
             """
 

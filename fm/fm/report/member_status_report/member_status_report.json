@@ -36,7 +36,7 @@
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status ",
-   "mandatory": 0,
+   "mandatory": 1,
    "options": "Active\nPending\nExpired",
    "wildcard_filter": 0
   }
@@ -45,12 +45,13 @@
  "is_standard": "Yes",
  "json": "{}",
  "letterhead": null,
- "modified": "2025-06-20 14:48:10.518674",
+ "modified": "2025-07-01 10:56:01.680813",
  "modified_by": "Administrator",
  "module": "Fm",
  "name": "Member Status Report",
  "owner": "Administrator",
  "prepared_report": 0,
+ "query": "SELECT full_name,membership_plan,status \nFROM tabMember\nWhere status= %s;",
  "ref_doctype": "Member",
  "report_name": "Member Status Report",
  "report_script": "def execute(filters=None):\n    filters = filters or {}\n    status = filters.get(\"status\", \"Active\")\n    data = frappe.db.sql(\"\"\"\n        SELECT name, full_name, membership_plan, end_date, status\n        FROM `tabMember`\n        WHERE status=%s\n    \"\"\", status, as_dict=1)\n\n    columns = [\n        {\"fieldname\":\"name\",\"label\":\"ID\",\"fieldtype\":\"Link\",\"options\":\"Member\"},\n        {\"fieldname\":\"full_name\",\"label\":\"Full Name\",\"fieldtype\":\"Data\",\"width\":200},\n        {\"fieldname\":\"membership_plan\",\"label\":\"Plan\",\"fieldtype\":\"Data\"},\n        {\"fieldname\":\"end_date\",\"label\":\"End Date\",\"fieldtype\":\"Date\"},\n        {\"fieldname\":\"status\",\"label\":\"Status\",\"fieldtype\":\"Data\"}\n    ]\n\n    return columns, data\n",

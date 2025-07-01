@@ -2,7 +2,7 @@ import frappe
 import traceback
 from frappe.model.document import Document
 
-class MEMBERRENWAL(Document):
+class MemberRenewal(Document):
     def after_insert(self):
         if not (self.name1 and self.new_plan and self.new_validity):
             frappe.msgprint("Member, New Plan, or New Validity is missing. Skipping renewal process.")
@@ -15,7 +15,7 @@ class MEMBERRENWAL(Document):
             member.membership_plan = self.new_plan
             member.end_date = self.new_validity
             member.status = "Active"
-
+            member.mode_of_payment=self.custom_mode_of_payment or "None"
             member.save(ignore_permissions=True)  
           
             

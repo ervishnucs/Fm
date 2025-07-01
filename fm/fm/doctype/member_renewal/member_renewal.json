@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_guest_to_view": 1,
  "allow_rename": 1,
  "autoname": "MR.#####",
  "creation": "2025-06-19 11:39:43.621155",
@@ -17,8 +18,7 @@
   "new_plan",
   "currency_myrw",
   "durationin_months",
-  "new_validity",
-  "amended_from"
+  "new_validity"
  ],
  "fields": [
   {
@@ -98,25 +98,15 @@
    "fieldname": "new_validity",
    "fieldtype": "Date",
    "label": "Validity "
-  },
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "MEMBER RENWAL",
-   "print_hide": 1,
-   "read_only": 1,
-   "search_index": 1
   }
  ],
  "grid_page_length": 50,
- "index_web_pages_for_search": 1,
+ "is_published_field": "name1",
  "links": [],
- "modified": "2025-06-30 10:23:40.040824",
+ "modified": "2025-06-30 15:24:02.059674",
  "modified_by": "Administrator",
  "module": "Fm",
- "name": "MEMBER RENWAL",
+ "name": "Member Renewal",
  "naming_rule": "Set by user",
  "owner": "Administrator",
  "permissions": [

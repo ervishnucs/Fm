@@ -1,4 +1,4 @@
-frappe.ui.form.on('MEMBER RENWAL', {
+frappe.ui.form.on('Member Renewal', {
     onload: function (frm) {
         // Set renewal_date to today if it's empty
         if (!frm.doc.renewal_date) {
