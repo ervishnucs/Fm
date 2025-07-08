@@ -14,11 +14,18 @@
   "membership_fee",
   "validity",
   "status",
+  "payment_status_section",
+  "paid",
+  "make_payment_section",
+  "now_paid",
+  "mode_of_payment",
   "continue_with_new_plan_section",
   "new_plan",
   "currency_myrw",
   "durationin_months",
-  "new_validity"
+  "new_validity",
+  "renew_your_plan_section",
+  "renew_paid"
  ],
  "fields": [
   {
@@ -98,12 +105,52 @@
    "fieldname": "new_validity",
    "fieldtype": "Date",
    "label": "Validity "
+  },
+  {
+   "fieldname": "payment_status_section",
+   "fieldtype": "Section Break",
+   "label": "Current Plan Payment Status "
+  },
+  {
+   "default": "0",
+   "fetch_from": "name1.paid",
+   "fieldname": "paid",
+   "fieldtype": "Check",
+   "label": "Paid"
+  },
+  {
+   "fieldname": "make_payment_section",
+   "fieldtype": "Section Break",
+   "label": "Make Payment "
+  },
+  {
+   "default": "0",
+   "fieldname": "now_paid",
+   "fieldtype": "Check",
+   "label": "Paid"
+  },
+  {
+   "fieldname": "mode_of_payment",
+   "fieldtype": "Select",
+   "label": "Mode Of Payment",
+   "options": "UPI\nCash\nOnline Transfer\nNone"
+  },
+  {
+   "fieldname": "renew_your_plan_section",
+   "fieldtype": "Section Break",
+   "label": "Renew Your Plan"
+  },
+  {
+   "default": "0",
+   "fieldname": "renew_paid",
+   "fieldtype": "Check",
+   "label": "Paid"
   }
  ],
  "grid_page_length": 50,
  "is_published_field": "name1",
  "links": [],
- "modified": "2025-06-30 15:24:02.059674",
+ "modified": "2025-07-07 11:26:36.917710",
  "modified_by": "Administrator",
  "module": "Fm",
  "name": "Member Renewal",
@@ -119,6 +166,29 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Trainer",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Member",
    "share": 1,
    "write": 1
   }

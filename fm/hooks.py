@@ -179,6 +179,11 @@ scheduler_events = {
    # }
 #}
 
+doc_events = {
+    "Member": {
+        "after_insert": "fm.fm.automation.create_membership_payment.create_membership_payment"  
+          }
+}
 
 
 

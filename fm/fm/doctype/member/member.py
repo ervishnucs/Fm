@@ -2,9 +2,12 @@ import frappe
 from frappe.model.document import Document
 
 class Member(Document):
-    def after_insert(self, method=None):
+    
+           
+
+    def after_insert(self):
         if not self.email:
-            return None 
+            return
 
         message = f"""
         <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #f5f5f5;">
@@ -28,8 +31,10 @@ class Member(Document):
                 subject="Welcome to Your Fitness Journey!",
                 message=message
             )
-            
         except Exception:
             frappe.log_error(frappe.get_traceback(), "Failed to send welcome email")
         
-        return None  
+
+       
+        
+
