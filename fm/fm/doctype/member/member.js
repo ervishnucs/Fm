@@ -34,7 +34,7 @@ frappe.ui.form.on('Member', {
         
         }
     },
-
+    
     mode_of_payment: function(frm) {
         const mode = frm.doc.mode_of_payment;
 

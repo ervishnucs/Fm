@@ -3,114 +3,108 @@ import traceback
 from frappe.model.document import Document
 from frappe.utils import getdate, nowdate
 
-from frappe.utils import nowdate
 
 class MemberRenewal(Document):
-   
-
-    
     def after_insert(self):
+       
+
         try:
             member = frappe.get_doc("Member", self.name1)
 
             if member.status not in ["Pending", "Expired"]:
                 frappe.msgprint("Member status is not eligible for renewal. Only Pending or Expired members can renew.")
                 return
-
-            if self.renew_paid and self.custom_mode_of_payment and member.status == 'Expired':
-                try:
-                    member.update({
-                        "paid": 1,
-                        "mode_of_payment": self.custom_mode_of_payment,
-                        "membership_plan": self.new_plan,
-                        "fee": self.currency_myrw,
-                        "start_date": self.renewal_date,
-                        "end_date": self.new_validity,
-                        "status": "Active"
-                    })
-                    member.save(ignore_permissions=True)
-                    self.now_paid = 1
-                    self.save(ignore_permissions=True)
-
-                    payment_name = frappe.db.get_value(
-                        "Membership Payment",
-                        {"name1": member.name, "date": self.renewal_date or nowdate()},
-                        "name"
-                    )
-                    payment = frappe.get_doc("Membership Payment", payment_name) if payment_name else frappe.new_doc("Membership Payment")
-                    payment.update({
-                        "name1": member.full_name,  # Or member.name if it's ID-based
-                        "amount": self.currency_myrw,
-                        "mode_of_payment": self.custom_mode_of_payment,
-                        "date": self.renewal_date or nowdate(),
-                        "paid": 1,
-                    })
-                    payment.save(ignore_permissions=True)
-
-                    frappe.msgprint(f"Membership renewed successfully with plan: {self.new_plan}.")
-                    if member.email:
-                        self.send_confirmation_email(member)
-
-                except Exception as e:
-                    frappe.log_error(traceback.format_exc(), "Renewal Failed")
-                    frappe.msgprint(f"An error occurred during membership renewal: {e}")
+            if self.renew_paid == 1 and  self.custom_mode_of_payment == "None" :
+                self.renew_paid = 0
+                self.save(ignore_permissions=True)
+                frappe.msgprint("Please select a valid mode of payment for renewal.")   
+                return 
+            if self.now_paid == 1 and self.mode_of_payment == "None":
+                self.now_paid = 0
+                self.save(ignore_permissions=True)
+                frappe.msgprint("Please select a valid mode of payment to clear pending dues.")
                 return
 
-            #  CASE 2: Clearing pending dues
-            elif self.now_paid and self.mode_of_payment and member.status == 'Pending':
-                try:
-                    if self.validity and getdate(self.validity) <= getdate(nowdate()):
-                        member.update({
+                 
+            # CASE 1: Renewing an expired member
+            if self.renew_paid ==1 and self.custom_mode_of_payment!="None" and member.status == "Expired":
+                member.update({
+                    "paid": 1,
+                    "mode_of_payment": self.custom_mode_of_payment,
+                    "membership_plan": self.new_plan,
+                    "fee": self.currency_myrw,
+                    "start_date": self.renewal_date,
+                    "end_date": self.new_validity,
+                    "status": "Active"
+                })
+                member.save(ignore_permissions=True)
+
+                self.now_paid = 1
+                
+                self.save(ignore_permissions=True)
+
+                payment = frappe.new_doc("Membership Payment")
+                payment.update({
+                    "name1": member.full_name,
+                    "amount": self.currency_myrw,
+                    "mode_of_payment": self.custom_mode_of_payment,
+                    "date": self.renewal_date or nowdate(),
+                    "paid": 1
+                })
+                payment.insert(ignore_permissions=True)
+
+                frappe.msgprint(f"Membership renewed successfully with plan: {self.new_plan}.")
+
+                if member.email and not frappe.flags.in_test:
+                    self.send_confirmation_email(member)
+
+            # CASE 2: Clearing pending dues
+            elif self.now_paid and self.mode_of_payment and member.status == "Pending":
+                if self.validity and getdate(self.validity) <= getdate(nowdate()):
+                    member.update({
                         "paid": 1,
                         "mode_of_payment": self.mode_of_payment,
                         "status": "Expired"
                     })
-                        member.save(ignore_permissions=True)
-                        payment = frappe.new_doc("Membership Payment")
-                        payment.update({
-                        "name1": member.name,
-                        "amount": member.fee,
-                        "mode_of_payment": self.mode_of_payment,
-                        "date": self.renewal_date or nowdate(),
-                        "paid": 1,
-                        "status": "Paid"
-                    })
-                        payment.insert(ignore_permissions=True)
-
-                        frappe.msgprint(" Pending dues cleared successfully.")
-                        return
-                    else:
-                        member.update({
+                    self.db_set("paid", 1, update_modified=True)
+                    self.save(ignore_permissions=True)
+                else:
+                    member.update({
                         "paid": 1,
                         "mode_of_payment": self.mode_of_payment,
                         "status": "Active"
                     })
-                        member.save(ignore_permissions=True)
-                        payment = frappe.new_doc("Membership Payment")
-                        payment.update({
-                        "name1": member.name,
-                        "amount": member.fee,
-                        "mode_of_payment": self.mode_of_payment,
-                        "date": self.renewal_date or nowdate(),
-                        "paid": 1,
-                        "status": "Paid"
-                    })
-                        payment.insert(ignore_permissions=True)
+                    self.db_set("paid", 1, update_modified=True)
+                    self.save(ignore_permissions=True)
+                member.save(ignore_permissions=True)
 
-                        frappe.msgprint(" Pending dues cleared successfully.")
-                        return
+                payment = frappe.new_doc("Membership Payment")
+                payment.update({
+                    "name1": member.name,
+                    "amount": member.fee,
+                    "mode_of_payment": self.mode_of_payment,
+                    "date": self.renewal_date or nowdate(),
+                    "paid": 1,
+                    "status": "Paid"
+                })
+                payment.insert(ignore_permissions=True)
 
-
-                except Exception as e:
-                    frappe.log_error(traceback.format_exc(), "Pending Payment Failed")
-                    frappe.msgprint(f"An error occurred while clearing pending dues: {e}")
+                frappe.msgprint("Pending dues cleared successfully.")
+            else:
+                frappe.msgprint("Invalid Payment !!!")
                 return
 
-        except Exception as e:
+        except Exception:
+            if frappe.flags.in_test:
+                frappe.db.rollback(savepoint="before_member_renewal")
             frappe.log_error(traceback.format_exc(), "Membership Renewal Critical Failure")
-            frappe.msgprint(f"An unexpected error occurred: {e}")
+            frappe.msgprint("An unexpected error occurred during membership renewal.")
+            return
+        
 
     def send_confirmation_email(self, member):
+        if frappe.flags.in_test:
+             return 
         message = f"""
             <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #e8f5e9;">
                 <div style="max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 10px; border: 1px solid #c8e6c9;">
@@ -142,7 +136,6 @@ class MemberRenewal(Document):
                         )
                     ]
                 )
-                
         except Exception as e:
             frappe.log_error(f"Email Sending Error: {e}", "Membership Renewal Email Failed")
             frappe.msgprint(f"Error sending confirmation email: {e}")

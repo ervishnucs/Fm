@@ -36,13 +36,13 @@
    "fieldname": "total_fee",
    "fieldtype": "Currency",
    "label": "Total Fee",
-   "reqd": 1
+   "read_only": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-06-18 20:51:26.202076",
+ "modified": "2025-07-09 12:40:31.978564",
  "modified_by": "Administrator",
  "module": "Fm",
  "name": "Membership Plan",

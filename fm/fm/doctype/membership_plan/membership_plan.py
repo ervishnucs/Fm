@@ -2,17 +2,27 @@ import frappe
 from frappe.model.document import Document
 
 class MembershipPlan(Document):
+    def validate(self):
+        # Ensure total_fee is calculated correctly
+        if self.monthly_fee and self.duration:
+            self.total_fee = self.monthly_fee * self.duration
+        else:
+            self.total_fee = 0.0
+
+        # Ensure plan name is unique
+        if frappe.db.exists("Membership Plan", {"plan": self.plan}):
+            frappe.throw(f"Membership Plan '{self.plan}' already exists.")
     def after_insert(self):
         self.send_plan_notification(is_new=True)
 
     def on_update(self):
         # Check if this is NOT a new insert to avoid duplicate emails
         if not self.flags.in_insert:
-            self.send_plan_notification(is_new=False)
+            self.send_plan_notification()
 
     def send_plan_notification(self, is_new=False):
         # Get all active members with emails
-        members = frappe.get_all("Member",
+        members = frappe.db.get_list("Member",
             filters={"status": "Active"},
             fields=["full_name", "email"]
         )

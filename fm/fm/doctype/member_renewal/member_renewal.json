@@ -86,13 +86,15 @@
    "fetch_from": "new_plan.total_fee",
    "fieldname": "currency_myrw",
    "fieldtype": "Currency",
-   "label": "Membership Fee"
+   "label": "Membership Fee",
+   "read_only": 1
   },
   {
    "fetch_from": "new_plan.duration",
    "fieldname": "durationin_months",
    "fieldtype": "Int",
-   "label": "Duration(in months)"
+   "label": "Duration(in months)",
+   "read_only": 1
   },
   {
    "fieldname": "renewal_date",
@@ -104,7 +106,8 @@
   {
    "fieldname": "new_validity",
    "fieldtype": "Date",
-   "label": "Validity "
+   "label": "Validity ",
+   "read_only": 1
   },
   {
    "fieldname": "payment_status_section",
@@ -114,9 +117,11 @@
   {
    "default": "0",
    "fetch_from": "name1.paid",
+   "fetch_if_empty": 1,
    "fieldname": "paid",
    "fieldtype": "Check",
-   "label": "Paid"
+   "label": "Paid",
+   "read_only": 1
   },
   {
    "fieldname": "make_payment_section",
@@ -150,7 +155,7 @@
  "grid_page_length": 50,
  "is_published_field": "name1",
  "links": [],
- "modified": "2025-07-07 11:26:36.917710",
+ "modified": "2025-07-09 21:13:13.285575",
  "modified_by": "Administrator",
  "module": "Fm",
  "name": "Member Renewal",
